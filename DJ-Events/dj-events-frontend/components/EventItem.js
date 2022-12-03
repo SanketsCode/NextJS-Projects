@@ -3,17 +3,19 @@ import Image from "next/image";
 import Link from "next/link";
 
 export default function EventItem({ evt }) {
+  // const image = evt.image.data.attributes.formats.medium.url;
+  console.log(evt.image.data.attributes.formats.medium.url);
   return (
     <div className={styles.event}>
       <div className={styles.img}>
         <Image
-          src={evt.image ? evt.image : "/images/event-default.png"}
+          src={evt.image ? evt.image.data.attributes.formats.medium.url : "/images/event-default.png"}
           width={170}
           height={100}
         />
       </div>
       <div className={styles.info}>
-        <span>{evt.data} at {evt.time}</span>
+        <span>{new Date(evt.date).toLocaleDateString('en-US')} at {evt.time}</span>
             <h3>{evt.name}</h3>
       </div>
       <div className={styles.link}>

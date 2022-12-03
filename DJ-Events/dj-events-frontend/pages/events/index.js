@@ -11,7 +11,7 @@ export default function EventPage({events}) {
       {events.length === 0 && <h3>No Events to Show </h3>}
       {events.map(evt => {
         return (
-          <EventItem key={evt.id} evt={evt} />
+          <EventItem key={evt.id} evt={evt.attributes} />
         )
 
       })}
@@ -35,7 +35,7 @@ export async function getStaticProps(){
   // console.log(events);
 
   return {
-    props : {events},
+    props : {events:events.data},
     revalidate: 1
   }
 }
