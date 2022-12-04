@@ -9,7 +9,11 @@ import Image from "next/image";
 
 export default function EventPage({evt}) {
     const router = useRouter();
-    console.log(evt.attributes.image.data.attributes.formats.medium.url);
+    // console.log(evt);
+    let finalImage;
+    if(evt.attributes.image.data){
+      finalImage = evt.attributes.image.data.attributes.formats.medium.url;
+    }
     const deleteEvent = (e) => {
       console.log('delete');
     }
@@ -32,7 +36,7 @@ export default function EventPage({evt}) {
             <h1>{evt.name}</h1>
             {evt.attributes.image && (
               <div className={styles.image}>
-                <Image src={evt.attributes.image.data.attributes.formats.medium.url} width={960} height={600} />
+                {finalImage && <Image src={finalImage} width={960} height={600} />}
 
               </div>
             )}

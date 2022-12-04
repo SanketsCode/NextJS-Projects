@@ -4,12 +4,17 @@ import Link from "next/link";
 
 export default function EventItem({ evt }) {
   // const image = evt.image.data.attributes.formats.medium.url;
-  console.log(evt.image.data.attributes.formats.medium.url);
+  // console.log(evt.image.data.attributes.formats.medium.url);
+  let finalImage;
+  console.log(evt);
+  if(evt.image.data){
+    finalImage = evt.image.data.attributes.formats.medium.url;
+  }
   return (
     <div className={styles.event}>
       <div className={styles.img}>
         <Image
-          src={evt.image ? evt.image.data.attributes.formats.medium.url : "/images/event-default.png"}
+          src={finalImage? finalImage : "/images/event-default.png"}
           width={170}
           height={100}
         />
