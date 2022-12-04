@@ -4,7 +4,7 @@ import { API_URL } from "@/config/index";
 
 
 export default function EventPage({events}) {
-  console.log(events);
+  // console.log(events);
   return (
    <Layout>
       <h1>All Events</h1>
@@ -30,7 +30,7 @@ export default function EventPage({events}) {
 // }
 
 export async function getStaticProps(){
-  const res = await fetch(`${API_URL}/api/events`);
+  const res = await fetch(`${API_URL}/api/events?populate=*`);
   const events = await res.json();
   // console.log(events);
 

@@ -5,7 +5,7 @@ import Link from "next/link";
 
 
 export default function HomePage({events}) {
-  console.log(events[0]);
+  // console.log(events[0]);
   return (
    <Layout>
       <h1>Upcoming Events</h1>
@@ -38,7 +38,7 @@ export default function HomePage({events}) {
 export async function getStaticProps(){
   const res = await fetch(`${API_URL}/api/events?populate=*`);
   const events = await res.json();
-  console.log(events.data[0]);
+  // console.log(events.data[0]);
 
   return {
     props : {events : events.data},

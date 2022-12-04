@@ -1,11 +1,13 @@
 import Head from "next/head";
-import { useRouter } from "next/router"
+import { Router, useRouter } from "next/router"
 import Layout from "@/components/Layout";
 import { API_URL } from "@/config/index";
 import styles from '@/styles/Event.module.css';
 import Link from "next/link";
 import { FaPencilAlt, FaTimes } from "react-icons/fa";
 import Image from "next/image";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 export default function EventPage({evt}) {
     const router = useRouter();
@@ -14,8 +16,21 @@ export default function EventPage({evt}) {
     if(evt.attributes.image.data){
       finalImage = evt.attributes.image.data.attributes.formats.medium.url;
     }
-    const deleteEvent = (e) => {
-      console.log('delete');
+    const deleteEvent = async(e) => {
+      if(confirm('Are you shure?')){
+        const res = await fetch(`${API_URL}/api/events/${evt.id}`,{
+          method:'DELETE'
+        })
+
+        const data = await res.json();
+
+        if(!res.ok){
+          console.log(data.message);
+          toast.error('Your Data not Deleted');
+        }else{
+          router.push('/events');
+        }
+      }
     }
 
   return (
@@ -34,6 +49,7 @@ export default function EventPage({evt}) {
               {new Date(evt.attributes.date).toLocaleDateString('en-US')} at {evt.attributes.time}
             </span>
             <h1>{evt.name}</h1>
+            <ToastContainer />
             {evt.attributes.image && (
               <div className={styles.image}>
                 {finalImage && <Image src={finalImage} width={960} height={600} />}

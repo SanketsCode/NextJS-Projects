@@ -6,7 +6,7 @@ export default function EventItem({ evt }) {
   // const image = evt.image.data.attributes.formats.medium.url;
   // console.log(evt.image.data.attributes.formats.medium.url);
   let finalImage;
-  console.log(evt);
+  // console.log(evt);
   if(evt.image.data){
     finalImage = evt.image.data.attributes.formats.medium.url;
   }
