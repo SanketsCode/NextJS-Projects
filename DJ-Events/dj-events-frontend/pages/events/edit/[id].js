@@ -9,6 +9,9 @@ import 'react-toastify/dist/ReactToastify.css';
 import moment from "moment";
 import Image from "next/image";
 import { FaImage } from "react-icons/fa";
+import Modal from '@/components/Modal.js';
+import ImageUpload from "@/components/ImageUpload";
+
 
 export default function EditEventPage({evt}) {
     const oldData = evt.data;
@@ -24,6 +27,15 @@ export default function EditEventPage({evt}) {
     time: time,
     description: description
   });
+  const [showModal,setShowModal] = useState(false);
+
+  const imageUploaded = async (e) => {
+    const res = await fetch(`${API_URL}/api/events/${evt.data.id}?populate=*`)
+    const data = await res.json();
+    console.log(data);
+    // setImagePreview(data);
+    setShowModal(false);
+  }
 
 
   const router = useRouter();
@@ -158,10 +170,15 @@ export default function EditEventPage({evt}) {
         !imagePreview && <div><p>No Image Uploaded</p></div>
       }
       <div>
-        <button className="btn-secondary">
+        <button onClick={() => setShowModal(true)} className="btn-secondary">
                 <FaImage /> Set Image
         </button>
       </div>
+      <Modal show={showModal} 
+      onClose={() => setShowModal(false)}
+      >
+        <ImageUpload evtId={evt.data.id}  imageUploaded={imageUploaded}  />
+      </Modal>
     </Layout>
   );
 }

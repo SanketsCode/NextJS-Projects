@@ -40,13 +40,7 @@
     "image": {
       "type": "media",
       "multiple": false,
-      "required": false,
-      "allowedTypes": [
-        "images",
-        "files",
-        "videos",
-        "audios"
-      ]
+      "required": false
     },
     "user": {
       "type": "relation",
