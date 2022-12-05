@@ -11,9 +11,9 @@ export default function ImageUpload({evtId,imageUploaded}) {
         e.preventDefault();
         const formData = new FormData();
         formData.append('files', image)
-        formData.append('ref', 'api::myevents')
-        formData.append('refId', evtId)
-        formData.append('field.media', 'image') 
+        formData.append('ref', 'api::myevents.myevents')
+        formData.append('refId', evtId*1)
+        formData.append('field', 'image') 
 
         const res = await fetch(`${API_URL}/api/upload`,{
             method:'POST',
@@ -21,9 +21,9 @@ export default function ImageUpload({evtId,imageUploaded}) {
         })
 
         if(res.ok){
-            console.log(res);
-            // imageUploaded();
+            imageUploaded();
         }else{
+            // console.log(res);
             console.log("We got the error while uploading");
         }
     }

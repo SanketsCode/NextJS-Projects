@@ -32,8 +32,8 @@ export default function EditEventPage({evt}) {
   const imageUploaded = async (e) => {
     const res = await fetch(`${API_URL}/api/events/${evt.data.id}?populate=*`)
     const data = await res.json();
-    console.log(data);
-    // setImagePreview(data);
+    // console.log(data.data.attributes.image.data.formats.thumbnail.url);
+    setImagePreview(data.data.attributes.image.data.formats.thumbnail.url);
     setShowModal(false);
   }
 
