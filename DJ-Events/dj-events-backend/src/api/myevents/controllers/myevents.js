@@ -11,4 +11,8 @@ module.exports = createCoreController('api::myevents.myevents',{
         var { query } = ctx.request
         return strapi.query('api::myevents.myevents').count({ where: query });
     }
+    
 });
+
+
+
